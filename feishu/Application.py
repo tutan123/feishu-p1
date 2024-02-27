@@ -66,7 +66,7 @@ class Bot(FeishuBase):
             "app_id": self.app_id,
             "app_secret": self.app_secret
         }
-        self.request.tenant_access_token = self.request.get(url, req_body)
+        self.request.tenant_access_token = self.request.post(url, req_body)
         self.request.tenant_access_token['expire'] += time.time()
         return self.request.tenant_access_token
 
@@ -102,6 +102,16 @@ class Bot(FeishuBase):
         url = "/message/v4/send/"
         card_body = self.get_card_message_body(text, **kwargs)
         card_body['open_id'] = user_open_id
+        return self.request.post(url, data=card_body)
+
+    @tenant_access_token
+    def send_group_card_message(self, open_chat_id, text=None, **kwargs):
+        url = "/message/v4/send/"
+        if 'card_body' not in kwargs:
+            card_body = self.get_card_message_body(text, **kwargs)
+        else:
+            card_body = kwargs.get('card_body')
+        card_body['open_chat_id'] = open_chat_id
         return self.request.post(url, data=card_body)
 
     @tenant_access_token

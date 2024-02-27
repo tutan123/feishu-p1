@@ -14,13 +14,13 @@ with open("README.md", "r", encoding='utf-8') as fh:
 
 setuptools.setup(
     name="feishu-p1",
-    version="1.0.1",
+    version="1.0.2",
     author="tutu",
     author_email="tutu@gmail.com",
     description="Feishu Third-party Libraries",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/liyao2598330/feishu-sdk",
+    url="https://github.com/tutan123/feishu-p1",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 2.7",
